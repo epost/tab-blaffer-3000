@@ -19,7 +19,6 @@ function main() {
 
   var checkbox1 = document.getElementById('checkbox-1')
   var button1 = document.getElementById('button-1')
-  var button2 = document.getElementById('button-2')
 
   // update UI from (initial) state
   checkbox1.checked = state.dumpTabsFromAllWindows
@@ -112,6 +111,5 @@ function main() {
 
   checkbox1.addEventListener('change', onCheckChange, false);
   button1.addEventListener('click', dumpTabs, false);
-  button2.addEventListener('click', boop, false);
 }
 document.addEventListener('DOMContentLoaded', main)
