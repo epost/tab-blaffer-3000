@@ -8,16 +8,24 @@
   <head>
     <title>Erik's Tab Blaffer 3000 Chrome Extension</title>
     <style>
+      html {
+        min-width: 400px;
+        width: 800px;
+      }
       body {
         font-family: "Segoe UI", "Lucida Grande", Tahoma, sans-serif;
         font-size: 100%;
       }
       #status {
-        /* avoid an excessively wide status text */
         white-space: pre;
         text-overflow: ellipsis;
         overflow: hidden;
-        max-width: 400px;
+
+        /* avoid an excessively wide status text */
+        /* max-width: 400px; */
+
+        background: #ccc;
+        width: 100%;
       }
     </style>
 
@@ -35,11 +43,10 @@
     <input type="checkbox" name="checkbox-1" id="checkbox-1" />
     <label for="checkbox-1">include tabs from all windows</label>
     <br/>
-    <input type="button" name="button-1" id="button-1" value="dump!" />
-    <input type="button" name="button-2" id="button-2" value="boop!" />
-
+    dump tabs as:
+    <input type="button" name="button-dump-tabs-as-org-sections" id="button-dump-tabs-as-org-sections" value="org-mode sections" />
+    <input type="button" name="button-dump-tabs-as-org-lists" id="button-dump-tabs-as-org-lists" value="org-mode lists" />
     <pre id="status">
-      press button to dump tabs
     </pre>
     <!-- <img id="image-result" hidden> -->
   </body>
