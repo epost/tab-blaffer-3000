@@ -33,29 +33,29 @@ function main() {
     debug('state post = '+ JSON.stringify(state))
   }
 
-  function formatDictAsOrg(dict) {
-    function formatTabAsOrg(tab) {
-      return '*** [[' + tab.url + '][' + tab.title + ']]'
-    }
+  function _formatDictAsOrgSections(formatTab) {
+    return function (dict) {
 
-    function formatTabsAsOrg(tabs) {
-      return R.compose(
-        R.join('\n'),
-        R.map(formatTabAsOrg)
-      )(tabs)
-    }
+      function formatTabs(tabs) {
+        return R.compose(
+          R.join('\n'),
+          R.map(formatTab)
+        )(tabs)
+      }
 
-    return "" +
-      '* bookmarks dumped\n' +
-      '\n' +
-      R.compose(
-        R.join('\n'),
-        R.values,
-        // R.mapObjIndexed((i, k, obj) => '** window ' + k + '\n\n' + R.map(formatTabAsOrg, obj[k]))
-        R.mapObjIndexed((i, k, obj) => '** window ' + k + '\n' + formatTabsAsOrg(obj[k]) + '\n')
-      )(dict) +
-      '';
+      return "" +
+        '* bookmarks dumped\n' +
+        '\n' +
+        R.compose(
+          R.join('\n'),
+          R.values,
+          R.mapObjIndexed((i, k, obj) => '** window ' + k + '\n' + formatTabs(obj[k]) + '\n')
+        )(dict) +
+        '';
+    }
   }
+
+  var formatDictAsOrgSections = _formatDictAsOrgSections(tab => '*** [[' + tab.url + '][' + tab.title + ']]')
 
   function formatDictAsJson(dict) {
     return "" +
@@ -85,7 +85,7 @@ function main() {
         // var tabs = R.compose(R.groupBy(t => t.windowId))(tabs)
 
         // var tabs = R.compose(formatDictAsJson, R.groupBy(t => t.windowId))(tabs)
-        var tabs = R.compose(formatDictAsOrg, R.groupBy(t => t.windowId))(tabs)
+        var tabs = R.compose(formatDictAsOrgSections, R.groupBy(t => t.windowId))(tabs)
 
         // var tabs = R.compose(R.map(tabs => JSON.stringify(tabs)), R.groupBy(t => t.windowId))(tabs)
         // dump(JSON.stringify(tabs, null, 2))
