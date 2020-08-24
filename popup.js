@@ -80,15 +80,15 @@ function main() {
         // one tab (and at most one active tab), so tabs is a non-empty array
 
         // R.map(t => dump(JSON.stringify(t)), tabs)
-        // var tabs = R.groupBy(t => t.windowId)(tabs)
-        // var tabs = R.compose(R.groupBy(t => t.windowId))(tabs)
+        // var tabsDump = R.groupBy(t => t.windowId)(tabs)
+        // var tabsDump = R.compose(R.groupBy(t => t.windowId))(tabs)
 
         // var tabs = R.compose(formatDictAsJson, R.groupBy(t => t.windowId))(tabs)
-        var tabs = R.compose(formatDictAsOrgSections, R.groupBy(t => t.windowId))(tabs)
+        var tabsDump = R.compose(formatDictAsOrgSections, R.groupBy(t => t.windowId))(tabs)
 
-        // var tabs = R.compose(R.map(tabs => JSON.stringify(tabs)), R.groupBy(t => t.windowId))(tabs)
+        // var tabsDump = R.compose(R.map(tabs => JSON.stringify(tabs)), R.groupBy(t => t.windowId))(tabs)
         // dump(JSON.stringify(tabs, null, 2))
-        dump(tabs)
+        dump(tabsDump)
       }
     )
   }
